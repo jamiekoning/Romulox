@@ -39,7 +39,7 @@ Here you can click the button labeled "Add a Platform" to add your first platfor
   1. Enter your desired display name for the platform (e.g. Genesis, SNES, etc).
   2. Enter your desired display company for the platform (e.g. Sega, Nintendo, etc).
   3. Select the appropriate PlatformType abbreviation from the dropdown box (e.g. GEN for Genesis, SNES for Super Nintendo, etc)
-  4. Enter the path to your platform data. This path **must** be in the `wwwroot` folder and **must not** contain `wwwroot` (e.g. `Roms/Genesis` **_not_** `wwwroot/Roms/Genesis`
+  4. Enter the path to your platform data. This path **must** be in the `wwwroot` folder and **must not** contain `wwwroot` (e.g. `Platforms/Genesis` **_not_** `wwwroot/Platforms/Genesis`
   5. Enter the path to the desired No-Intro dat file if you wish to use one for naming. Be sure to **exclude** `wwwroot` in the path.
   6. Click Add Platform
 
