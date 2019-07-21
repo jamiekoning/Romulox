@@ -67,6 +67,8 @@ Note: This will not delete any files on the disk.
   1. From the platform page, click on the game you wish to remove.
   2. On the game page, click the button titled "Remove" and confirm your selection on the next page.
   
+Note: This will not delete any files on the disk.
+  
 ### Downloading a Game
   1. From the platform page, click on the game you wish to download.
   2. On the game page, click the button titled 'Download'.
