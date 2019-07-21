@@ -11,7 +11,7 @@ Romulox also supports downloading information asynchronously from the GiantBomb 
 # Using the Romulox Source Code
 
 ## Installing Packages Using NPM
-Using the terminal browse to Romulox/client-app/ and execute `npm install`.
+Using the terminal browse to `Romulox/client-app/` and execute `npm install`.
 
 ## Configuring The `appsettings.json` File
 Create a [GiantBomb API Account](https://www.giantbomb.com/api/) and set the `GiantBombApiKey` entry to your API key.
