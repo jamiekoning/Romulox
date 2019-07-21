@@ -13,6 +13,7 @@ using Romulox.Core.Helpers;
 using Romulox.Core.Interfaces;
 using Romulox.Core.NoIntro.Entities;
 using Romulox.Core.NoIntro.Transformers;
+using Platform = Romulox.Core.Entities.Platform;
 
 namespace Romulox.Core.GiantBomb
 {
@@ -55,29 +56,37 @@ namespace Romulox.Core.GiantBomb
         {
             var path = platform.Path;
             var platformType = platform.PlatformType;
-            var currentGames = platform.Games;
+            var unprocessedGames = platform.Games.Where(g => g.Processed == false).ToList();
 
             List<Game> games = new List<Game>();
             List<GameInfo> gameInfos = new List<GameInfo>();
 
-            foreach (var file in Directory.GetFiles(path))
+            foreach (var game in unprocessedGames)
             {
-                if (file.Contains(".DS_") || file.Contains(".dat"))
-                    continue;
-                
-                if (currentGames.Count(g => file.Contains(g.Path)) > 0)
-                    continue;
-                
-                GameInfo gameInfo = new GameInfo();
+                if (game.Path != null)
+                {
+                    GameInfo gameInfo = new GameInfo();
+                    gameInfo.directory = path;
+                    gameInfo.platformType = platformType;
+                    gameInfo.path = game.Path;
+                    gameInfo.transformedName = gameNameTransformer.Transform(game.Path) ??
+                                      Path.GetFileNameWithoutExtension(game.Path);
+                    
+                    
 
-                gameInfo.path = file;
-                gameInfo.directory = path;
-                gameInfo.transformedName = gameNameTransformer.Transform(file) ?? Path.GetFileNameWithoutExtension(file);
-                gameInfo.platformType = platformType;
-                gameInfos.Add(gameInfo);
+                    gameInfos.Add(gameInfo);
+                }
             }
 
-            gameInfos = (await Task.WhenAll(gameInfos.Select(SearchRequestAsync))).ToList();
+            try
+            {
+                gameInfos = (await Task.WhenAll(gameInfos.Select(SearchRequestAsync))).ToList();
+            }
+            catch (WebException)
+            {
+                // If we hit 401 then filter out any requests that were not able to be handled
+                gameInfos = gameInfos.Where(g => g.searchResponse != null).ToList();
+            }
 
             for (int i = 0; i < gameInfos.Count; i++)
             {
@@ -85,15 +94,25 @@ namespace Romulox.Core.GiantBomb
                 gameInfo.guid = FindGuidInSearchResponse(gameInfo);
                 gameInfos[i] = gameInfo;
             }
-            
-            gameInfos = (await Task.WhenAll(gameInfos.Select(GameRequestAsync))).ToList();
-            
+
+            try
+            {
+                gameInfos = (await Task.WhenAll(gameInfos.Select(GameRequestAsync))).ToList();
+            }
+            catch (WebException)
+            {
+                // If we hit 401 then filter out any requests that were not able to be handled
+                gameInfos = gameInfos.Where(g => g.gameResponse != null).ToList();
+            }
+
+            // this should never 401 as it is not an API request
             gameInfos = (await Task.WhenAll(gameInfos.Select(SaveImagesAsync))).ToList();
 
+            // finish the rest of the processing as we have the responses that we are interested in
             foreach (GameInfo gameInfo in gameInfos)
             {
                 Game game = new Game();
-                game.Path = pathTools.AbsolutePathToWebRootPath(gameInfo.path);
+                game.Path = gameInfo.path;
                 
                 if (gameInfo.guid != null)
                 {
@@ -119,6 +138,9 @@ namespace Romulox.Core.GiantBomb
                     game.Name = Path.GetFileNameWithoutExtension(gameInfo.path);
                     game.Description = "No Description Found";
                 }
+
+                // flag the game as processed if it has made it this far
+                game.Processed = true;
                 
                 games.Add(game);
                 

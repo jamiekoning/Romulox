@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Romulox.DataAccess;
 
 namespace Romulox.DataAccess.Migrations
 {
     [DbContext(typeof(RomuloxContext))]
-    partial class RomuloxContextModelSnapshot : ModelSnapshot
+    [Migration("20190721213510_SetDefaultProcessedValue")]
+    partial class SetDefaultProcessedValue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

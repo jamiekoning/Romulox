@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,6 +19,9 @@ namespace Romulox.Core.Entities
         [ForeignKey("PlatformId")]
         public Platform Platform { get; set; }
         public Guid PlatformId { get; set; }
+        
+        [DefaultValue(false)]
+        public bool Processed { get; set; }
 
         // Metadata
         public DateTime? ReleaseDate { get; set; }

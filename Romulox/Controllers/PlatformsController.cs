@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Romulox.Core.Entities;
+using Romulox.Core.Helpers;
 using Romulox.Core.Interfaces;
 using Romulox.Core.Models;
 using Romulox.Core.NoIntro.Transformers;
@@ -59,14 +61,20 @@ namespace Romulox.Controllers
             }
 
             var platformEntity = mapper.Map<Platform>(platform);
-            /*
-            platformEntity.Games = giantBombGameProvider.ProvideGamesAsync(
-                platformEntity.Path,
-                platformEntity.PlatformType,
-                platformEntity.Games.ToList(),
-                new NoIntroMetaTransformer(platformEntity.NoIntroDatFilePath)
-            ).Result;*/
             
+            foreach (var file in Directory.GetFiles(platformEntity.Path))
+            {
+                if (file.Contains(".DS_") || file.Contains(".dat"))
+                    continue;
+
+                Game game = new Game();
+                game.Id = new Guid();
+                game.Path = file;
+                game.Name = Path.GetFileName(file);
+
+                platformEntity.Games.Add(game);
+            }
+
             platformsRepository.AddPlatform(platformEntity);
 
             if (!platformsRepository.Save())
@@ -102,18 +110,25 @@ namespace Romulox.Controllers
             }
             
             var platformFromRepository = platformsRepository.GetPlatform(platformId);
+            platformFromRepository.Games = platformsRepository.GetGamesForPlatform(platformId).ToList();
 
-            var currentGames = platformsRepository.GetGamesForPlatform(platformId).ToList();
-
-            var newGames = giantBombGameProvider.ProvideGamesAsync(
+            var processedGames = giantBombGameProvider.ProvideGamesAsync(
                 platformFromRepository,
                 new NoIntroMetaTransformer(platformFromRepository.NoIntroDatFilePath)
             ).Result;
 
-            foreach (var game in newGames)
+            var games = platformFromRepository.Games.ToList();
+            foreach (var game in processedGames)
             {
-                platformFromRepository.Games.Add(game);
+                var index = games.FindIndex(g => g.Path == game.Path);
+
+                if (index != -1)
+                {
+                    games[index] = game;
+                }
             }
+
+            platformFromRepository.Games = games;
 
             if (!platformsRepository.Save())
             {
