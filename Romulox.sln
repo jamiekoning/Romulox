@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romulox", "Romulox\Romulox.csproj", "{0888DDDD-51CE-480F-8BD4-0CDD1F70306F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romulox.Core", "Romulox.Core\Romulox.Core.csproj", "{9A7C175A-4EA6-411B-B856-09E270094BEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romulox.DataAccess", "Romulox.DataAccess\Romulox.DataAccess.csproj", "{DA67F879-C68B-4BD1-A6F6-A9834635DE27}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0888DDDD-51CE-480F-8BD4-0CDD1F70306F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0888DDDD-51CE-480F-8BD4-0CDD1F70306F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0888DDDD-51CE-480F-8BD4-0CDD1F70306F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0888DDDD-51CE-480F-8BD4-0CDD1F70306F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A7C175A-4EA6-411B-B856-09E270094BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A7C175A-4EA6-411B-B856-09E270094BEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A7C175A-4EA6-411B-B856-09E270094BEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A7C175A-4EA6-411B-B856-09E270094BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA67F879-C68B-4BD1-A6F6-A9834635DE27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA67F879-C68B-4BD1-A6F6-A9834635DE27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA67F879-C68B-4BD1-A6F6-A9834635DE27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA67F879-C68B-4BD1-A6F6-A9834635DE27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+EndGlobal
