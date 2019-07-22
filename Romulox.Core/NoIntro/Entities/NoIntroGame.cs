@@ -6,7 +6,7 @@ namespace Romulox.Core.NoIntro.Entities
 {
     public class NoIntroGame
     {
-        [XmlElement(ElementName = "name")] 
+        [XmlAttribute(AttributeName = "name")] 
         public string Name { get; set; }
         [XmlElement(ElementName = "description")] 
         public string Description { get; set; }
