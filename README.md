@@ -52,7 +52,7 @@ This section will cover building the source for a runnable dotnet `.dll` file.
 ## Publishing with dotnet
   1. Browse to the `Romulox/Romulox` project directory using the terminal.
   2. Run `dotnet publish -o Published`.
-  3.The published project will be placed in the `Published` folder.
+  3. The published project will be placed in the `Published` folder.
   
 ## Building with Vue
   1. Browse to the `Romulox/Romulox/client-app/src` directory using the terminal.
