@@ -76,7 +76,7 @@ Note: This will not delete any files on the disk.
   1. From the platform page, click on the game you wish to edit.
   2. On the game page, click the button titled "Edit" and edit your desired details.
 
-### Remove a Game
+### Removing a Game
   1. From the platform page, click on the game you wish to remove.
   2. On the game page, click the button titled "Remove" and confirm your selection on the next page.
   
