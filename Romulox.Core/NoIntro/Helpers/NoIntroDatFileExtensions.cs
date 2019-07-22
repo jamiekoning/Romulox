@@ -21,8 +21,8 @@ namespace Romulox.Core.NoIntro.Helpers
                 }
                 
             }
-            
-            throw new GameNotFoundException("No NoIntroGame was found for the Md5: " + md5Hash);
+
+            return null;
         }
 
         public static NoIntroRom FindRomByMd5Hash(this NoIntroDatFile noIntroDatFile, string md5Hash)
@@ -38,18 +38,22 @@ namespace Romulox.Core.NoIntro.Helpers
                 }
                 
             }
-            
-            throw new GameNotFoundException("No NoIntroGame was found for the Md5: " + md5Hash); 
+
+            return null;
         }
         
         public static string FindGameNameByMd5Hash(this NoIntroDatFile noIntroDatFile, string md5Hash)
         {
-            return noIntroDatFile.FindGameByMd5Hash(md5Hash).Name;
+            var game = noIntroDatFile.FindGameByMd5Hash(md5Hash);
+
+            return game?.Name;
         }
         
         public static string FindRomNameByMd5Hash(this NoIntroDatFile noIntroDatFile, string md5Hash)
         {
-            return noIntroDatFile.FindRomByMd5Hash(md5Hash).Name;
+            var rom = noIntroDatFile.FindRomByMd5Hash(md5Hash);
+
+            return rom?.Name;
         }
     }
     
