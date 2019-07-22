@@ -13,22 +13,24 @@ Romulox also supports downloading information asynchronously from the GiantBomb 
 
 # Using the Romulox Source Code
 
+This section covers everything that needs to be done before using the source code with your editor or IDE of choice.
+
+## Dependencies
+  1. Download and install the [.NET Core SDK](https://dotnet.microsoft.com/download) from Microsoft.
+  2. Download and install the [Node Package Manager (npm)](https://www.npmjs.com/get-npm).
+  3. Download and install vue using npm by running `npm install vue` from the terminal.
+
 ## Installing Packages Using npm
 Using the terminal browse to `Romulox/client-app/` and execute `npm install`.
 
+## Creating the Database
+  1. Using the terminal, browse to the `Romulox/Romulox.DataAccess` project directory. 
+  2. Using the terminal run `dotnet ef database update -s ../Romulox` to create the `romulox.db` file in the `Romulox/Romulox` folder.
+  
 ## Configuring The `appsettings.json` File
-Create a [GiantBomb API Account](https://www.giantbomb.com/api/) and set the `GiantBombApiKey` entry to your API key.
-
-## Creating and Updating the Database
-After configuring your `appsettings.json` file you must update the database using the provided migrations. 
-
-Using the terminal, browse to the `Romulox.DataAccess` project directory. 
-
-Using the `dotnet` CLI run the following command:
-
-`dotnet ef database update -s ../Romulox`
-
-Now you are ready to build and run Romulox.
+  1. Create a [GiantBomb API Account](https://www.giantbomb.com/api/) to get your API key.
+  2. In the `Romulox/Romulox/` folder open the `appsettings.json` file and set the `GiantBombApiKey` entry to your API key.
+  3. Save your changes to the `appsettings.json` file.
 
 ### Preparing the wwwroot Directory
 
@@ -39,6 +41,8 @@ For example: you may want to create a `Platforms` directory with subdirectories 
 Next store any `.dat` files that you wish to use. You may put them in the same directory as the ROM files, such as `wwwroot/Roms/N64/N64.dat`, or in a different directory entirely such as `wwwroot/Dat/Gen.dat`. Be sure to copy the `.dat` files you wish to use into your chosen directories.
 
 **Note:** You do not have to restart the application each time you copy over new files. 
+
+You are now ready to use the Romulox source code with your editor or IDE of choice.
 
 # Building for Production
 
