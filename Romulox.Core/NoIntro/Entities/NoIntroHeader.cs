@@ -5,8 +5,6 @@ namespace Romulox.Core.NoIntro.Entities
 {
     public class NoIntroHeader
     {
-        public Guid Id { get; set; }
-        
         [XmlElement(ElementName = "name")] 
         public string Name { get; set; }
         [XmlElement(ElementName = "description")] 

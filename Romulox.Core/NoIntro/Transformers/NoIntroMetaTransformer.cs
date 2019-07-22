@@ -22,7 +22,6 @@ namespace Romulox.Core.NoIntro.Transformers
                 {
                     return noIntroStringTransformer.Transform(gameName);
                 }
-                
             }
 
             return noIntroStringTransformer.Transform(path);
