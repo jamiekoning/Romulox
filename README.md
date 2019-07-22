@@ -13,7 +13,7 @@ Romulox also supports downloading information asynchronously from the GiantBomb 
 
 # Using the Romulox Source Code
 
-This section covers everything that needs to be done before using the source code with your editor or IDE of choice.
+This section covers prerequisites for using the Romulox source code with your editor or IDE of choice.
 
 ## Dependencies
   1. Download and install the [.NET Core SDK](https://dotnet.microsoft.com/download) from Microsoft.
@@ -32,7 +32,7 @@ Using the terminal browse to `Romulox/client-app/` and execute `npm install`.
   2. In the `Romulox/Romulox/` folder open the `appsettings.json` file and set the `GiantBombApiKey` entry to your API key.
   3. Save your changes to the `appsettings.json` file.
 
-### Preparing the wwwroot Directory
+## Preparing the wwwroot Directory
 
 First create directories in the `Romulox/wwwroot/` directory to hold your ROM and `.dat` files. 
 
