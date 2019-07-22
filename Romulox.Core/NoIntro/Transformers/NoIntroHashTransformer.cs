@@ -10,11 +10,9 @@ namespace Romulox.Core.NoIntro.Transformers
     public class NoIntroHashTransformer : IGameNameTransformer
     {
         private NoIntroDatFile noIntroDatFile;
-        private NoIntroStringTransformer noIntroStringTransformer;
 
         public NoIntroHashTransformer(string noIntroDataFilePath)
         {
-            noIntroStringTransformer = new NoIntroStringTransformer();
             noIntroDatFile = DeserializeDataFile(noIntroDataFilePath);
         }
         
@@ -23,7 +21,7 @@ namespace Romulox.Core.NoIntro.Transformers
             string md5Hash = ComputeMd5Hash(filePath);
             string gameName = FindNameByMd5Hash(md5Hash);
 
-            return gameName == null ? null : noIntroStringTransformer.Transform(gameName);
+            return gameName;
         }
 
         private string FindNameByMd5Hash(string md5Hash)
