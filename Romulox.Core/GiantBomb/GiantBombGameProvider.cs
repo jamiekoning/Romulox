@@ -249,43 +249,18 @@ namespace Romulox.Core.GiantBomb
 
             return guid;
         }
-        
+
         private DateTime BuildReleaseDate(Results result)
         {
             if (result.OriginalReleaseDate != null)
                 return DateTime.Parse(result.OriginalReleaseDate);
-            
-            if(result.ExpectedReleaseYear != null && result.ExpectedReleaseMonth != null && result.ExpectedReleaseDay != null)
-                return new DateTime(result.ExpectedReleaseYear.Value, result.ExpectedReleaseMonth.Value, result.ExpectedReleaseDay.Value);
+
+            if (result.ExpectedReleaseYear != null && result.ExpectedReleaseMonth != null &&
+                result.ExpectedReleaseDay != null)
+                return new DateTime(result.ExpectedReleaseYear.Value, result.ExpectedReleaseMonth.Value,
+                    result.ExpectedReleaseDay.Value);
 
             return DateTime.MinValue;
-        }
-
-        public async Task<List<NoIntroGame>> ProvideGamesAsync(List<NoIntroGame> batch, PlatformType platformType)
-        {
-            var gameNameTransformer = new NoIntroStringTransformer();
-
-            List<GameInfo> gameInfos = new List<GameInfo>();
-
-            foreach (var game in batch)
-            {
-                GameInfo gameInfo = new GameInfo();
-
-                gameInfo.transformedName = gameNameTransformer.Transform(game.Description);
-                gameInfo.platformType = platformType;
-                gameInfos.Add(gameInfo);
-            }
-
-            gameInfos = (await Task.WhenAll(gameInfos.Select(SearchRequestAsync))).ToList();
-
-            for (int i = 0; i < gameInfos.Count; i++)
-            {
-                GameInfo gameInfo = gameInfos[i];
-                gameInfo.guid = FindGuidInSearchResponse(gameInfo);
-                batch[i].GiantBombApiGuid = gameInfo.guid;
-            }
-
-            return batch;
         }
     }
 }
