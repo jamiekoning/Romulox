@@ -19,7 +19,6 @@ namespace Romulox.Core.NoIntro.Helpers
                         return game;
                     }
                 }
-                
             }
 
             return null;
@@ -36,7 +35,6 @@ namespace Romulox.Core.NoIntro.Helpers
                         return rom;
                     }
                 }
-                
             }
 
             return null;
