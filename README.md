@@ -30,7 +30,7 @@ Using the `dotnet` CLI run the following command:
 
 Now you are ready to build and run Romulox.
 
-### Preparing the wwwroot directory
+### Preparing the wwwroot Directory
 
 First create directories in the `Romulox/wwwroot/` directory to hold your ROM and `.dat` files. 
 
@@ -68,6 +68,9 @@ This section will cover building the source for a runnable dotnet `.dll` file.
 ## Configuring The `appsettings.json` File
   1. Create a [GiantBomb API Account](https://www.giantbomb.com/api/) to get your API key.
   2. In the `Romulox/Romulox/Published` folder open the `appsettings.json` file and set the `GiantBombApiKey` entry to your API key.
+  
+## Preparing the wwwroot folder
+  1. In the `Romulox/Romulox/Published/wwwroot` follow the directions from the [Preparing the wwwroot Directory](#preparing-the-wwwroot-directory) section.
 
 ## Running Romulox.dll
   1. Browse to the `Prod` directory using the terminal.
