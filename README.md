@@ -68,6 +68,7 @@ This section will cover building the source for a runnable dotnet `.dll` file.
 ## Configuring The `appsettings.json` File
   1. Create a [GiantBomb API Account](https://www.giantbomb.com/api/) to get your API key.
   2. In the `Romulox/Romulox/Published` folder open the `appsettings.json` file and set the `GiantBombApiKey` entry to your API key.
+  3. Save your changes to the `appsettings.json` file.
   
 ## Preparing the wwwroot folder
   1. In the `Romulox/Romulox/Published/wwwroot` follow the directions from the [Preparing the wwwroot Directory](#preparing-the-wwwroot-directory) section.
