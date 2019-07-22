@@ -12,18 +12,20 @@ namespace Romulox.Core.NoIntro.Transformers
         }
         public string Transform(string path)
         {
+            NoIntroStringTransformer noIntroStringTransformer = new NoIntroStringTransformer();
+            
             if (datFilePath != null)
             {
                 var gameName = new NoIntroHashTransformer(datFilePath).Transform(path);
 
                 if (gameName != null)
                 {
-                    return gameName;
+                    return noIntroStringTransformer.Transform(gameName);
                 }
                 
             }
 
-            return new NoIntroPathTransformer().Transform(path);
+            return new NoIntroStringTransformer().Transform(path);
         }
     }
 }
