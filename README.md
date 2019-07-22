@@ -13,7 +13,7 @@ Romulox also supports downloading information asynchronously from the GiantBomb 
 
 # Using the Romulox Source Code
 
-## Installing Packages Using NPM
+## Installing Packages Using npm
 Using the terminal browse to `Romulox/client-app/` and execute `npm install`.
 
 ## Configuring The `appsettings.json` File
@@ -40,6 +40,40 @@ Next store any `.dat` files that you wish to use. You may put them in the same d
 
 **Note:** You do not have to restart the application each time you copy over new files. 
 
+# Building for Production
+
+This section will cover building the source for a runnable dotnet `.dll` file.
+
+## Dependencies
+  1. Download and install the [.NET Core SDK](https://dotnet.microsoft.com/download) from Microsoft.
+  2. Download and install the [Node Package Manager (npm)](https://www.npmjs.com/get-npm).
+  3. Download and install vue using npm by running `npm install vue` from the terminal.
+
+## Publishing with dotnet
+  1. Browse to the `Romulox/Romulox` project directory using the terminal.
+  2. Run `dotnet publish -o Published`.
+  3.The published project will be placed in the `Published` folder.
+  
+## Building with Vue
+  1. Browse to the `Romulox/Romulox/client-app/src` directory using the terminal.
+  2. Eun `vue build`.
+  3. By default the built files will be placed in the `dist` folder.
+  4. Move or copy and paste the `dist` folder into the `client-app` folder at `Romulox/Romulox/Published/client-app/`
+
+## Creating the Database
+  1. Using the terminal, browse to the `Romulox/Romulox.DataAccess` project directory. 
+  2. Using the terminal run `dotnet ef database update -s ../Romulox`
+  3. Copy the created `romulox.db` file into the `Romulox/Romulox/Published` folder.
+  
+## Configuring The `appsettings.json` File
+  1. Create a [GiantBomb API Account](https://www.giantbomb.com/api/) to get your API key.
+  2. In the `Romulox/Romulox/Published` folder open the `appsettings.json` file and set the `GiantBombApiKey` entry to your API key.
+
+## Running Romulox.dll
+  1. Browse to the `Prod` directory using the terminal.
+  2. Run `dotnet Romulox.dll`
+  3. Navigate your browser to `https://localhost:5001/` and enjoy using Romulox!
+  
 # Using the Romulox Web Interface
 
 ## Handling Platform Data
