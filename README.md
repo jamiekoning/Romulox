@@ -32,7 +32,7 @@ Using the terminal browse to `Romulox/client-app/` and execute `npm install`.
   2. In the `Romulox/Romulox/` folder open the `appsettings.json` file and set the `GiantBombApiKey` entry to your API key.
   3. Save your changes to the `appsettings.json` file.
 
-## Preparing the wwwroot Directory
+## Preparing the `wwwroot` Directory
 
 First create directories in the `Romulox/wwwroot/` directory to hold your ROM and `.dat` files. 
 
@@ -53,12 +53,12 @@ This section will cover building the source for a runnable dotnet `.dll` file.
   2. Download and install the [Node Package Manager (npm)](https://www.npmjs.com/get-npm).
   3. Download and install vue using npm by running `npm install vue` from the terminal.
 
-## Publishing with dotnet
+## Publishing with `dotnet`
   1. Browse to the `Romulox/Romulox` project directory using the terminal.
   2. Run `dotnet publish -o Published`.
   3. The published project will be placed in the `Published` folder.
   
-## Building with Vue
+## Building with `vue`
   1. Browse to the `Romulox/Romulox/client-app/src` directory using the terminal.
   2. Run `vue build`.
   3. By default the built files will be placed in the `dist` folder.
@@ -74,10 +74,10 @@ This section will cover building the source for a runnable dotnet `.dll` file.
   2. In the `Romulox/Romulox/Published` folder open the `appsettings.json` file and set the `GiantBombApiKey` entry to your API key.
   3. Save your changes to the `appsettings.json` file.
   
-## Preparing the wwwroot folder
+## Preparing the `wwwroot` folder
   1. In the `Romulox/Romulox/Published/wwwroot` follow the directions from the [Preparing the wwwroot Directory](#preparing-the-wwwroot-directory) section.
 
-## Running Romulox.dll
+## Running `Romulox.dll`
   1. Browse to the `Published` directory using the terminal.
   2. Run `dotnet Romulox.dll`
   3. Navigate your browser to `https://localhost:5001/` and enjoy using Romulox!
