@@ -27,10 +27,6 @@ Using the `dotnet` CLI run the following command:
 
 Now you are ready to build and run Romulox.
 
-# Using the Romulox Web Interface
-
-## Handling Platform Data
-
 ### Preparing the wwwroot directory
 
 First create directories in the `Romulox/wwwroot/` directory to hold your ROM and `.dat` files. 
@@ -40,6 +36,10 @@ For example: you may want to create a `Platforms` directory with subdirectories 
 Next store any `.dat` files that you wish to use. You may put them in the same directory as the ROM files, such as `wwwroot/Roms/N64/N64.dat`, or in a different directory entirely such as `wwwroot/Dat/Gen.dat`. Be sure to copy the `.dat` files you wish to use into your chosen directories.
 
 **Note:** You do not have to restart the application each time you copy over new files. 
+
+# Using the Romulox Web Interface
+
+## Handling Platform Data
 
 Upon launch you will land at the platform listing page.
 
