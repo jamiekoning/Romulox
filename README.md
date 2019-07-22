@@ -8,6 +8,9 @@ Romulox supports identifying files by hash using a No-Intro dat file or by No-In
 
 Romulox also supports downloading information asynchronously from the GiantBomb API.
 
+# First Look
+![alt text](https://i.imgur.com/6wWHxdw.gif)
+
 # Using the Romulox Source Code
 
 ## Installing Packages Using NPM
