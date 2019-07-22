@@ -35,7 +35,7 @@ Now you are ready to build and run Romulox.
 
 First create directories in the `Romulox/wwwroot/` directory to hold your ROM and `.dat` files. 
 
-For example: you may want to create a `Platforms` directory with subdirectories for each specific platform such as `wwwroot/Platforms/Genesis` or `wwwroot/Roms/N64` which contain your ROM files. Be sure to copy over the ROM files that you wish to use to your chosen directories.
+For example: you may want to create a `Platforms` directory with subdirectories for each specific platform such as `wwwroot/Platforms/Genesis` or `wwwroot/Roms/N64` which contain your ROM files. Be sure to copy over the ROM files that you wish to use into your chosen directories.
 
 Next store any `.dat` files that you wish to use. You may put them in the same directory as the ROM files, such as `wwwroot/Roms/N64/N64.dat`, or in a different directory entirely such as `wwwroot/Dat/Gen.dat`. Be sure to copy the `.dat` files you wish to use into your chosen directories.
 
