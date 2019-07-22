@@ -74,7 +74,7 @@ This section will cover building the source for a runnable dotnet `.dll` file.
   1. In the `Romulox/Romulox/Published/wwwroot` follow the directions from the [Preparing the wwwroot Directory](#preparing-the-wwwroot-directory) section.
 
 ## Running Romulox.dll
-  1. Browse to the `Prod` directory using the terminal.
+  1. Browse to the `Published` directory using the terminal.
   2. Run `dotnet Romulox.dll`
   3. Navigate your browser to `https://localhost:5001/` and enjoy using Romulox!
   
