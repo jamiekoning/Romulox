@@ -24,7 +24,7 @@ namespace Romulox.Core.NoIntro.Transformers
             return gameName;
         }
 
-        private string FindNameByMd5Hash(string md5Hash)
+        public string FindNameByMd5Hash(string md5Hash)
         {
             foreach (NoIntroGame game in noIntroDatFile.NoIntroGames)
             {

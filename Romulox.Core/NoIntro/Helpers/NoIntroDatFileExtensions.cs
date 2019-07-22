@@ -1,5 +1,6 @@
 using System.IO;
 using System.Xml.Serialization;
+using Romulox.Core.Entities;
 using Romulox.Core.Exceptions;
 using Romulox.Core.NoIntro.Entities;
 
@@ -7,18 +8,6 @@ namespace Romulox.Core.NoIntro.Helpers
 {
     public static class NoIntroDatFileExtensions
     {
-        public static NoIntroDatFile LoadFromFile(this NoIntroDatFile noIntroDatFile, string noIntroDataFilePath)
-        {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(NoIntroDatFile));
-            using (FileStream noIntroDatafileStream = new FileStream(noIntroDataFilePath, FileMode.Open))
-            {
-                noIntroDatFile  = (NoIntroDatFile) xmlSerializer.Deserialize(noIntroDatafileStream);
-            }
-
-            return noIntroDatFile;
-            
-        }
-        
         public static NoIntroGame FindGameByMd5Hash(this NoIntroDatFile noIntroDatFile, string md5Hash)
         {
             foreach (var game in noIntroDatFile.NoIntroGames)
