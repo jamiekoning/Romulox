@@ -111,7 +111,25 @@ namespace Romulox.Controllers
             
             var platformFromRepository = platformsRepository.GetPlatform(platformId);
             platformFromRepository.Games = platformsRepository.GetGamesForPlatform(platformId).ToList();
+            
+            // add any new files in the directory
+            foreach (var file in Directory.GetFiles(platformFromRepository.Path))
+            {
+                if (file.Contains(".DS_") || file.Contains(".dat"))
+                    continue;
 
+                if (platformFromRepository.Games.Count(g => g.Path == file) == 0)
+                {
+                    Game game = new Game();
+                    game.Id = new Guid();
+                    game.Path = file;
+                    game.Name = Path.GetFileName(file);
+
+                    platformFromRepository.Games.Add(game); 
+                }
+                
+            }
+            
             var processedGames = giantBombGameProvider.ProvideGamesAsync(
                 platformFromRepository,
                 new NoIntroMetaTransformer(platformFromRepository.NoIntroDatFilePath)

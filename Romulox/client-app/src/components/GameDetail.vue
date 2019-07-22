@@ -65,15 +65,18 @@
         computed: {
             domain() {
                 return DomainService.getCurrentDomain();
-            } 
+            }
         },
         methods: {
             getGame: function() {
                 PlatformsApiService.getGame(this.$route.params.platformId, this.$route.params.gameId)
                     .then(function(response) {
                         this.game = response.data;
+                        // remove 'wwwroot// from path string
+                        this.game.path = this.game.path.slice(7);
                     }.bind(this));
             }
+            
         },
         mounted() {
             this.getGame();

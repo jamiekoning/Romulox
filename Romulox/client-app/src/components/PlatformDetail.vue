@@ -72,6 +72,7 @@
                 
                 PlatformsApiService.getGames(platformId)
                     .then(function (response) {
+                        console.log(response);
                         this.games = response.data;
                     }.bind(this));
             },
@@ -95,8 +96,9 @@
             sliceGames(length) {
                 let gameSets = [];
                 
-                for (let i = 0; i < this.games.length; i++) {
+                for (let i = 0; i <= this.games.length;) {
                     gameSets.push(this.games.slice(i, i + length));
+                    console.log('set', this.games.slice(i, i + length));
                     i += length;
                 }
                 

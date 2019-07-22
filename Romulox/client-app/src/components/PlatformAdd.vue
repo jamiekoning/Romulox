@@ -31,7 +31,7 @@
             
             <v-layout>
                 <v-btn type="submit" outline 
-                       v-bind:disabled="adding"
+                       v-bind:disabled="processing"
                 >
                     Add Platform
                 </v-btn>
@@ -51,7 +51,7 @@
             noIntroDatFilePath: '',
             platformType: '',
             platformTypes: [],
-            adding: false
+            processing: false
         }),
         methods: {
             getPlatformTypes() {
@@ -61,20 +61,15 @@
                 }.bind(this));
             },
             platformSubmit() {
-                this.adding = true;
-                if (this.noIntroDatFilePath === '') {
-                    this.noIntroDatFilePath = null;
-                }
-                else {
-                    this.noIntroDatFilePath = 'wwwroot/' + this.noIntroDatFilePath;
-                }
+                this.processing = true;
+                
                 PlatformsApiService.postPlatform({
                     name: this.platformName,
                     path: 'wwwroot/' + this.platformDirectory,
                     platformType: this.platformType,
-                    noIntroDatFilePath: this.noIntroDatFilePath
+                    noIntroDatFilePath: this.noIntroDatFilePath == null ? null : 'wwwroot/' + this.noIntroDatFilePath
                 }).then(function (response) {
-                    this.adding = false;
+                    this.processing = false;
                     this.$router.push({ name: 'PlatformList' });
                 }.bind(this));
             }
