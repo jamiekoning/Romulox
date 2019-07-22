@@ -56,7 +56,7 @@ This section will cover building the source for a runnable dotnet `.dll` file.
   
 ## Building with Vue
   1. Browse to the `Romulox/Romulox/client-app/src` directory using the terminal.
-  2. Eun `vue build`.
+  2. Run `vue build`.
   3. By default the built files will be placed in the `dist` folder.
   4. Move or copy and paste the `dist` folder into the `client-app` folder at `Romulox/Romulox/Published/client-app/`
 
