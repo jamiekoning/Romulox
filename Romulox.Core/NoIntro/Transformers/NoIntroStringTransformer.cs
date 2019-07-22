@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Romulox.Core.Interfaces;
 
 namespace Romulox.Core.NoIntro.Transformers
@@ -16,8 +17,10 @@ namespace Romulox.Core.NoIntro.Transformers
          *
          * Games with "The" in the title are named with a trailing ", The"
          */
-        public string Transform(string fileName)
+        public string Transform(string file)
         {
+            var fileName = Path.GetFileName(file);
+            
             // Sequence of () come after game title
             var firstOpenParenthesis = fileName.IndexOf('(');
 

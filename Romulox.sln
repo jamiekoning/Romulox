@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romulox.Core", "Romulox.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romulox.DataAccess", "Romulox.DataAccess\Romulox.DataAccess.csproj", "{DA67F879-C68B-4BD1-A6F6-A9834635DE27}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Romulox.Tests", "Romulox.Tests\Romulox.Tests.csproj", "{96AB4A00-B771-45BA-AC29-3F8FD63895E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{DA67F879-C68B-4BD1-A6F6-A9834635DE27}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DA67F879-C68B-4BD1-A6F6-A9834635DE27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DA67F879-C68B-4BD1-A6F6-A9834635DE27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96AB4A00-B771-45BA-AC29-3F8FD63895E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96AB4A00-B771-45BA-AC29-3F8FD63895E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96AB4A00-B771-45BA-AC29-3F8FD63895E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96AB4A00-B771-45BA-AC29-3F8FD63895E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
