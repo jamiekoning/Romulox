@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Xml.Serialization;
 using Romulox.Core.Interfaces;
 using Romulox.Core.NoIntro.Entities;
+using Romulox.Core.NoIntro.Helpers;
 
 namespace Romulox.Core.NoIntro.Transformers
 {
@@ -19,26 +20,9 @@ namespace Romulox.Core.NoIntro.Transformers
         public string Transform(string filePath)
         {
             string md5Hash = ComputeMd5Hash(filePath);
-            string gameName = FindNameByMd5Hash(md5Hash);
+            string gameName = noIntroDatFile.FindGameNameByMd5Hash(md5Hash);
 
             return gameName;
-        }
-
-        public string FindNameByMd5Hash(string md5Hash)
-        {
-            foreach (NoIntroGame game in noIntroDatFile.NoIntroGames)
-            {
-                foreach (var rom in game.NoIntroRoms)
-                {
-                    if (rom.Md5.Equals(md5Hash))
-                    {
-                        return rom.Name;
-                    }
-                }
-                
-            }
-            
-            return null;
         }
 
         private string ComputeMd5Hash(string noIntroDataFilePath)

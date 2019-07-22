@@ -9,7 +9,7 @@ namespace Romulox.Core.NoIntro.Entities
     [Serializable, XmlRoot("datafile")]
     public class NoIntroDatFile
     {
-        public static NoIntroDatFile LoadFromFile(string file)
+        public static NoIntroDatFile CreateFromFile(string file)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(NoIntroDatFile));
             
