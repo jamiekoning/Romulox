@@ -25,7 +25,7 @@ namespace Romulox.Core.NoIntro.Transformers
                 
             }
 
-            return new NoIntroStringTransformer().Transform(path);
+            return noIntroStringTransformer.Transform(path);
         }
     }
 }
