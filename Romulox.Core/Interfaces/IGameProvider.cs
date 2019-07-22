@@ -7,6 +7,6 @@ namespace Romulox.Core.Interfaces
     // Interface that any API handling class can implement in order to be injected
     public interface IGameProvider
     { 
-        Task<List<Game>> ProvideGamesAsync(Platform platform, IGameNameTransformer gameNameTransformer);
+        Task<List<Game>> ProvideGamesAsync(Platform platform);
     }
 }

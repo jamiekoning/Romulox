@@ -51,12 +51,12 @@ namespace Romulox.Core.GiantBomb
             this.apiKey = apiKey;
         }
 
-        public async Task<List<Game>> ProvideGamesAsync(Romulox.Core.Entities.Platform platform, 
-            IGameNameTransformer gameNameTransformer)
+        public async Task<List<Game>> ProvideGamesAsync(Romulox.Core.Entities.Platform platform)
         {
             var path = platform.Path;
             var platformType = platform.PlatformType;
             var unprocessedGames = platform.Games.Where(g => g.Processed == false).ToList();
+            var gameNameTransformer = new NoIntroMetaTransformer(platform.NoIntroDatFilePath);
 
             List<Game> games = new List<Game>();
             List<GameInfo> gameInfos = new List<GameInfo>();

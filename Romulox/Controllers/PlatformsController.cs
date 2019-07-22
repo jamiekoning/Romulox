@@ -130,10 +130,7 @@ namespace Romulox.Controllers
                 
             }
             
-            var processedGames = giantBombGameProvider.ProvideGamesAsync(
-                platformFromRepository,
-                new NoIntroMetaTransformer(platformFromRepository.NoIntroDatFilePath)
-            ).Result;
+            var processedGames = giantBombGameProvider.ProvideGamesAsync(platformFromRepository).Result;
 
             var games = platformFromRepository.Games.ToList();
             foreach (var game in processedGames)
