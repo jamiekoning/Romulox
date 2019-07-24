@@ -1,45 +1,50 @@
 <template>
     <v-container>
-        <v-layout>
-            <h2> Editing {{ game.name }} </h2>
-        </v-layout>
-        <v-form @submit.prevent="gameSubmit">
-            <v-layout>
-                <v-text-field label="Title" 
-                              v-model="name" 
-                              v-bind:placeholder="game.name"
-                ></v-text-field>
-            </v-layout>
-
-            <v-layout>
-                <v-text-field label="Description" 
-                              v-model="description" 
-                              v-bind:placeholder="game.description"
-                ></v-text-field>
-            </v-layout>
-
-            <v-layout>
-                <v-text-field label="Developers" 
-                              v-model="developers" 
-                              v-bind:placeholder="game.developers"
-                ></v-text-field>
-            </v-layout>
-
-            <v-layout>
-                <v-text-field label="Publishers" 
-                              v-model="publishers" 
-                              v-bind:placeholder="game.publishers"
-                ></v-text-field>
-            </v-layout>
-
-            <v-layout>
-                <v-btn type="submit" color="green" outline 
-                       v-bind:disabled="editing" 
-                >
-                    Edit Game
-                </v-btn>
-            </v-layout>
-        </v-form>
+        <v-card>
+            <v-card-title>
+                <h2> Editing {{ game.name }} </h2>
+            </v-card-title>
+            
+            <v-card-text>
+                <v-form @submit.prevent="gameSubmit">
+                    <v-layout>
+                        <v-text-field label="Title" 
+                                      v-model="name" 
+                                      v-bind:placeholder="game.name"
+                        ></v-text-field>
+                    </v-layout>
+        
+                    <v-layout>
+                        <v-text-field label="Description" 
+                                      v-model="description" 
+                                      v-bind:placeholder="game.description"
+                        ></v-text-field>
+                    </v-layout>
+        
+                    <v-layout>
+                        <v-text-field label="Developers" 
+                                      v-model="developers" 
+                                      v-bind:placeholder="game.developers"
+                        ></v-text-field>
+                    </v-layout>
+        
+                    <v-layout>
+                        <v-text-field label="Publishers" 
+                                      v-model="publishers" 
+                                      v-bind:placeholder="game.publishers"
+                        ></v-text-field>
+                    </v-layout>
+        
+                    <v-layout>
+                        <v-btn type="submit" color="green" outline 
+                               v-bind:disabled="editing" 
+                        >
+                            Edit Game
+                        </v-btn>
+                    </v-layout>
+                </v-form>
+            </v-card-text>
+        </v-card>
     </v-container>
 </template>
 
