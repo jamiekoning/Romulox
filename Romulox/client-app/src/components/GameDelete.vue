@@ -25,7 +25,8 @@
 </template>
 
 <script>
-    import { PlatformsApiService } from "../services/PlatformsApiService";
+    import { ApiService } from "../services/ApiService";
+    import { GameDto } from "../models/GameDto";
 
     export default {
         name: 'GameDelete',
@@ -33,18 +34,25 @@
             game: {}
         }),
         methods: {
+            initGame() {
+                ApiService.get(`/platforms/${this.platformId}/games/${this.gameId}`)
+                    .then(function(game) {
+                        this.game = Object.create(GameDto);
+                        this.game.init(game);
+                    }.bind(this));
+            },
             deleteGame() {
-                PlatformsApiService.deleteGame(this.$route.params.platformId, this.$route.params.gameId)
+                ApiService.delete(`/platforms/${this.platformId}/games/${this.gameId}/`)
                     .then(function(response) {
-                        this.$router.push({ name: 'PlatformDetail', params: { platformId: this.game.platformId }});
+                        this.$router.push({ name: 'PlatformDetail', params: { platformId: this.platformId }});
                     }.bind(this)); 
             }
         },
-        mounted() {
-            PlatformsApiService.getGame(this.$route.params.platformId, this.$route.params.gameId)
-                .then(function(response) {
-                    this.game = response.data;
-                }.bind(this));
+        created() {
+            this.platformId = this.$route.params.platformId;
+            this.gameId = this.$route.params.gameId;
+
+            this.initGame();
         }
     }
 </script>

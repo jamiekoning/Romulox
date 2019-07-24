@@ -1,16 +1,27 @@
 var GameDto = {
-  init(response) {
-      let responseData = response.data;
-
-      this.id = responseData.id;
-      this.name = responseData.name;
-      this.platformId = responseData.platformId;
-      this.releaseDate = responseData.releaseDate;
-      this.developers = responseData.developers;
-      this.publishers = responseData.publishers;
-      this.description = responseData.description;
-      this.iconImage = responseData.iconImage;
-      this.image = responseData.image;
-      
-  }  
+    id: '',
+    name: '',
+    platformId: '',
+    releaseDate: Date.now(),
+    developers: '',
+    publishers: '',
+    description: '',
+    iconImage: '',
+    image: '', 
+    path: '',
+    
+    init(game) {
+      this.id = game.id;
+      this.name = game.name;
+      this.platformId = game.platformId;
+      this.releaseDate = game.releaseDate;
+      this.developers = game.developers;
+      this.publishers = game.publishers;
+      this.description = game.description;
+      this.iconImage = game.iconImage;
+      this.image = game.image;
+      this.path = game.path.slice(7); //slice 'wwwroot/' from beginning of path
+    }  
 };
+
+export { GameDto }

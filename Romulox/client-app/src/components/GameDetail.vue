@@ -48,8 +48,9 @@
 </template>
 
 <script>
-    import { PlatformsApiService } from "../services/PlatformsApiService";
+    import { ApiService } from "../services/ApiService";
     import { DomainService } from "../services/DomainService";
+    import { GameDto } from "../models/GameDto";
 
     export default {
         name: 'GameDetail',
@@ -68,18 +69,20 @@
             }
         },
         methods: {
-            getGame: function() {
-                PlatformsApiService.getGame(this.$route.params.platformId, this.$route.params.gameId)
-                    .then(function(response) {
-                        this.game = response.data;
-                        // remove 'wwwroot// from path string
-                        this.game.path = this.game.path.slice(7);
+            initGame: function() {
+                ApiService.get(`/platforms/${this.platformId}/games/${this.gameId}`)
+                    .then(function(game) {
+                        this.game = Object.create(GameDto);
+                        this.game.init(game);
                     }.bind(this));
             }
             
         },
-        mounted() {
-            this.getGame();
+        created() {
+            this.platformId = this.$route.params.platformId;
+            this.gameId = this.$route.params.gameId;
+            
+            this.initGame();
         }
     }
 </script>

@@ -41,7 +41,7 @@
 </template>
 
 <script>
-    import { PlatformsApiService } from "../services/PlatformsApiService";
+    import { ApiService } from "../services/ApiService";
     
     export default {
         name: 'PlatformAdd',
@@ -54,16 +54,16 @@
             processing: false
         }),
         methods: {
-            getPlatformTypes() {
-                PlatformsApiService.getPlatformTypes()
-                    .then(function(response) {
-                        this.platformTypes = response.data;
+            initPlatformTypes() {
+                ApiService.get('/platforms/types')
+                    .then(function(types) {
+                        this.platformTypes = types;
                 }.bind(this));
             },
             platformSubmit() {
                 this.processing = true;
                 
-                PlatformsApiService.postPlatform({
+                ApiService.post('/platforms/', {
                     name: this.platformName,
                     path: 'wwwroot/' + this.platformDirectory,
                     platformType: this.platformType,
@@ -75,7 +75,7 @@
             }
         },
         created() {
-            this.getPlatformTypes();
+            this.initPlatformTypes();
         }
 
     }

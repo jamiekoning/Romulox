@@ -1,10 +1,17 @@
 var PlatformDto = {
-  init(response) {
-      let responseData = response.data;
-      
-      this.id = responseData.id;
-      this.name = responseData.name;
-      this.platformType = responseData.platformType;
+    id: '',
+    name: '',
+    platformType: '',
+    
+    init(platform) {
+      if (typeof platform.id === 'string' &&
+          typeof platform.name === 'string' &&
+          typeof platform.platformType === 'string') {
+
+          this.id = platform.id;
+          this.name = platform.name;
+          this.platformType = platform.platformType;
+      }
   }  
 };
 

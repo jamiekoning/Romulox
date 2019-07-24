@@ -37,19 +37,34 @@
 </template>
 
 <script>
-    import {PlatformsApiService} from "../services/PlatformsApiService";
+    import { ApiService } from "../services/ApiService";
+    import { PlatformDto } from "../models/PlatformDto";
+    
 
     export default {
         name: 'PlatformList',
         data: () => ({
             platforms: []
         }),
-        mounted() {
-            PlatformsApiService.getPlatforms().then(function (response) {
-                if (this.platforms !== response.data) {
-                    this.platforms = response.data;
+        methods: {
+            initPlatforms() {
+                ApiService.get('/platforms').then(function (platforms) {
+                    this.createPlatforms(platforms);
+                }.bind(this));
+            },
+            createPlatforms(platforms) {
+                for (let platform of platforms) {
+
+                    let dto = Object.create(PlatformDto);
+                    dto.init(platform);
+
+                    this.platforms.push(dto);
                 }
-            }.bind(this));
+            }
+            
+        },
+        created() {
+            this.initPlatforms();
         }
     }
 </script>

@@ -44,32 +44,35 @@
 </template>
 
 <script>
-    import { PlatformsApiService } from "../services/PlatformsApiService";
+    import { ApiService } from "../services/ApiService";
+    import { GameDto } from "../models/GameDto";
 
     export default {
         name: 'GameEdit',
         data: () => ({
             game: {},
+            
             name: '',
             releaseDate: Date,
             developers: '',
             publishers: '', 
             description: '',
             response: '',
-            editing: false
+            editing: false,
+            
+            platformId: '',
+            gameId: ''
         }),
         methods: {
-            getGame: function() {
-                PlatformsApiService.getGame(this.$route.params.platformId, this.$route.params.gameId)
-                    .then(function(response) {
-                        this.game = response.data;
+            initGame: function() {
+                ApiService.get(`/platforms/${this.platformId}/games/${this.gameId}`)
+                    .then(function(game) {
+                        this.game = Object.create(GameDto);
+                        this.game.init(game);
                     }.bind(this));
             },
             gameSubmit() {
                 this.editing = true;
-                let platformId = this.$route.params.platformId;
-                
-                let gameId = this.$route.params.gameId;
                 
                 let data = {
                     name: this.name || this.game.name,
@@ -78,15 +81,18 @@
                     publishers: this.publishers || this.game.publishers
                 };
                 
-                PlatformsApiService.postGame(platformId, gameId, data)
+                ApiService.post(`/platforms/${this.platformId}/games/${this.gameId}/`, data)
                     .then(function (response) {
                         this.editing = false;
-                        this.$router.push({ name: 'GameDetail', params: { platformId: this.game.platformId, gameId: this.game.id } });
+                        this.$router.push({ name: 'GameDetail', params: { platformId: this.platformId, gameId: this.gameId } });
                 }.bind(this));
             }
         },
         created() {
-            this.getGame();
+            this.platformId = this.$route.params.platformId;
+            this.gameId = this.$route.params.gameId;
+            
+            this.initGame();
         }
     }
 </script>

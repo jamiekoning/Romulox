@@ -24,26 +24,34 @@
 </template>
 
 <script>
-    import { PlatformsApiService } from "../services/PlatformsApiService";
+    import { ApiService } from "../services/ApiService";
+    import { PlatformDto } from "../models/PlatformDto";
 
     export default {
         name: 'PlatformDelete',
         data: () => ({
-            platform: {}
+            platform: {},
+            platformId: ''
         }),
         methods: {
+            initPlatform() {
+                ApiService.get(`/platforms/${this.platformId}/`)
+                    .then(function(platform) {
+                        this.platform = Object.create(PlatformDto);
+                        this.platform.init(platform);
+                    }.bind(this));
+            },
             deletePlatform() {
-                PlatformsApiService.deletePlatform(this.$route.params.platformId)
+                ApiService.delete(`/platforms/${this.platformId}/`)
                     .then(function(response) {
                         this.$router.push({ name: 'PlatformList' });
                     }.bind(this));
             }
         },
-        mounted() {
-            PlatformsApiService.getPlatform(this.$route.params.platformId)
-                .then(function(response) {
-                    this.platform = response.data;
-                }.bind(this));
+        created() {
+            this.platformId = this.$route.params.platformId;
+
+            this.initPlatform();
         }
     }
 </script>

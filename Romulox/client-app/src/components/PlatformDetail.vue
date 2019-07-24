@@ -29,7 +29,7 @@
                 </v-btn>
 
                 <v-btn outline color="red"
-                       v-bind:to="{ name: 'PlatformDelete', params: { platformId: platform.id} }"
+                       v-bind:to="{ name: 'PlatformDelete', params: { platformId: this.platformId} }"
                        v-on:click=""
                 >
                     Remove
@@ -39,17 +39,17 @@
 </template>
 
 <script>
-    import { PlatformsApiService } from "../services/PlatformsApiService";
-    import { PlatformDto } from "../models/PlatformDto";
+    import { ApiService } from "../services/ApiService";
+    import { GameDto } from "../models/GameDto";
     import { DomainService } from "../services/DomainService";
 
     export default {
         name: "PlatformDetail",
         data: function() {
             return {
-                platform: {},
                 games: [],
-                refreshing: false
+                refreshing: false,
+                platformId: ''
             }
         },
         computed: {
@@ -59,55 +59,46 @@
             }
         },
         methods: {
-            getPlatform: function() {
-                let platformId = this.$route.params.platformId;
-                
-                PlatformsApiService.getPlatform(platformId)
-                    .then(function (response) {
-                        let platformDto = Object.create(PlatformDto);
-                        platformDto.init(response);
-                        
-                        this.platform = platformDto;
-                    }.bind(this));
-                
-                PlatformsApiService.getGames(platformId)
-                    .then(function (response) {
-                        console.log(response);
-                        this.games = response.data;
+            initGames() {
+                ApiService.get(`/platforms/${this.platformId}/games`)
+                    .then(function (games) {
+                        this.createGames(games);
                     }.bind(this));
             },
-            getGames() {
-                let platformId = this.$route.params.platformId;
-                PlatformsApiService.getGames(platformId)
-                    .then(function (response) {
-                       return response.data;
-                    }.bind(this));
+            createGames(games) {
+                for (let game of games) {
+                    let gameDto = Object.create(GameDto);
+                    gameDto.init(game);
+                    
+                    this.games.push(gameDto);
+                }
             },
             refreshGames() {
                 this.refreshing = true;
-                let platformId = this.$route.params.platformId;
                 
-                PlatformsApiService.refreshGames(platformId)
+                ApiService.get(`/platforms/${this.platformId}/refresh`)
                     .then(function(response) {
-                       this.getPlatform();
-                       this.refreshing = false;
+                        //TODO add new games without resetting array
+                        this.games = [];
+                        this.initGames();
+                        this.refreshing = false;
                     }.bind(this));
             },
             sliceGames(length) {
-                let gameSets = [];
+                let gameSlices = [];
                 
                 for (let i = 0; i <= this.games.length;) {
-                    gameSets.push(this.games.slice(i, i + length));
-                    console.log('set', this.games.slice(i, i + length));
+                    gameSlices.push(this.games.slice(i, i + length));
                     i += length;
                 }
                 
-                return gameSets;
+                return gameSlices;
                 
             }
         },
         created() {
-            this.getPlatform();
+            this.platformId = this.$route.params.platformId;
+            this.initGames();
         }
     }
 </script>
