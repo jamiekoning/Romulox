@@ -20,6 +20,9 @@
       <None Update="Romulox.Core\NoIntro\DatFiles\Sega - Game Gear (20190419-061443).dat">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Update="Romulox.Core\NoIntro\DatFiles\Atari Jaguar - Games - [J64] (TOSEC-v2018-07-01_CM).dat">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

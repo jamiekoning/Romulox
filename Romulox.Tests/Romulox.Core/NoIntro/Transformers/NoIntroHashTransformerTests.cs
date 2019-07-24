@@ -12,7 +12,7 @@ namespace Romulox.Tests.Romulox.Core.NoIntro.Transformers
         private NoIntroHashTransformer noIntroHashTransformer;
         private string datFilesDirectory;
 
-        private static object[] HashNameCases =
+        private static object[] hashNameCases =
         {
             new object[]
             {
@@ -52,7 +52,7 @@ namespace Romulox.Tests.Romulox.Core.NoIntro.Transformers
             datFilesDirectory = Directory.GetCurrentDirectory() + "/Romulox.Core/NoIntro/DatFiles/";
         }
         
-        [TestCaseSource(nameof(HashNameCases))]
+        [TestCaseSource(nameof(hashNameCases))]
         public void FindGameNameByMd5Hash_ExpectedName(string datFile, string md5Hash, string name)
         {
             var path = datFilesDirectory + datFile;
