@@ -1,6 +1,6 @@
 # About Romulox
 
-Romulox is a Single Page Application (SPA) for managing ROM files on a local computer or network.
+Romulox is a Single Page Application (SPA) for locally managing ROM files.
 
 Romulox uses an ASP.NET Core Web API with Entity Framework Core and SQLite for its backend and VueJS with Vuetify for its frontend.
 
