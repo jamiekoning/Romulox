@@ -14,9 +14,7 @@ namespace Romulox.DataAccess.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Path = table.Column<string>(nullable: false),
-                    PlatformType = table.Column<int>(nullable: false),
-                    NoIntroDatFilePath = table.Column<string>(nullable: true),
-                    Company = table.Column<string>(nullable: true)
+                    PlatformType = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,11 +29,11 @@ namespace Romulox.DataAccess.Migrations
                     Name = table.Column<string>(nullable: false),
                     Path = table.Column<string>(nullable: false),
                     PlatformId = table.Column<Guid>(nullable: false),
+                    Processed = table.Column<bool>(nullable: false),
                     ReleaseDate = table.Column<DateTime>(nullable: true),
                     Developers = table.Column<string>(nullable: true),
                     Publishers = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    IconImage = table.Column<string>(nullable: true),
                     Image = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

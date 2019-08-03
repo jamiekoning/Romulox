@@ -14,14 +14,8 @@
                     </v-layout>
                     
                     <v-layout>
-                        <v-text-field label="Platform Path" prefix="wwwroot/" placeholder="Platforms/Genesis/"
+                        <v-text-field label="Platform Path" prefix="/wwwroot/Platforms/" placeholder="Genesis/"
                                       v-model="platformDirectory"
-                        ></v-text-field>
-                    </v-layout>
-        
-                    <v-layout>
-                        <v-text-field label="No-Intro Dat File Path (Optional)" prefix="wwwroot/" placeholder="Platforms/Genesis/Gen.dat"
-                                      v-model="noIntroDatFilePath"
                         ></v-text-field>
                     </v-layout>
                     
@@ -33,7 +27,7 @@
                     </v-layout>
                     
                     <v-layout>
-                        <v-btn type="submit" outline 
+                        <v-btn type="submit" outlined
                                v-bind:disabled="processing"
                         >
                             Add Platform
@@ -47,13 +41,12 @@
 
 <script>
     import { ApiService } from "../services/ApiService";
-    
+
     export default {
         name: 'PlatformAdd',
         data: () => ({
             platformName: '',
             platformDirectory: '',
-            noIntroDatFilePath: '',
             platformType: '',
             platformTypes: [],
             processing: false
@@ -65,14 +58,14 @@
                         this.platformTypes = types;
                 }.bind(this));
             },
+            
             platformSubmit() {
                 this.processing = true;
                 
                 ApiService.post('/platforms/', {
                     name: this.platformName,
-                    path: 'wwwroot/' + this.platformDirectory,
-                    platformType: this.platformType,
-                    noIntroDatFilePath: this.noIntroDatFilePath == null ? null : 'wwwroot/' + this.noIntroDatFilePath
+                    path: 'wwwroot/Platforms/' + this.platformDirectory,
+                    platformType: this.platformType
                 }).then(function (response) {
                     this.processing = false;
                     this.$router.push({ name: 'PlatformList' });

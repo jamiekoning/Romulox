@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Romulox.Core.Configuration.RomuloxSettings;
 using Romulox.Core.Entities;
+using Romulox.Core.GiantBomb;
+using Romulox.Core.GiantBomb.Helpers;
 using Romulox.Core.Helpers;
-using Romulox.Core.Interfaces;
 using Romulox.Core.Models;
-using Romulox.Core.NoIntro.Transformers;
+using Romulox.Core.NoIntro.Helpers;
 using Romulox.DataAccess;
+
 
 namespace Romulox.Controllers
 {
@@ -17,14 +22,17 @@ namespace Romulox.Controllers
     public class PlatformsController : Controller
     {
         private readonly IPlatformsRepository platformsRepository;
-        private readonly IGameProvider giantBombGameProvider;
         private readonly IMapper mapper;
+        private readonly IOptions<RomuloxSettings> romuloxSettings;
+        private readonly IHostingEnvironment hostingEnvironment;
         
-        public PlatformsController(IPlatformsRepository platformsRepository, IGameProvider giantBombGameProvider, IMapper mapper)
+        public PlatformsController(IPlatformsRepository platformsRepository, IMapper mapper, 
+            IOptions<RomuloxSettings> romuloxSettings, IHostingEnvironment hostingEnvironment)
         {
             this.platformsRepository = platformsRepository;
-            this.giantBombGameProvider = giantBombGameProvider;
             this.mapper = mapper;
+            this.romuloxSettings = romuloxSettings;
+            this.hostingEnvironment = hostingEnvironment;
         }
         
         [HttpGet]
@@ -64,7 +72,10 @@ namespace Romulox.Controllers
             
             foreach (var file in Directory.GetFiles(platformEntity.Path))
             {
-                if (file.Contains(".DS_") || file.Contains(".dat"))
+                FileInfo fileInfo = new FileInfo(file);
+                
+                // skip empty and hidden
+                if (fileInfo.Length == 0 || fileInfo.Attributes.HasFlag(FileAttributes.Hidden))
                     continue;
 
                 Game game = new Game();
@@ -115,7 +126,10 @@ namespace Romulox.Controllers
             // add any new files in the directory
             foreach (var file in Directory.GetFiles(platformFromRepository.Path))
             {
-                if (file.Contains(".DS_") || file.Contains(".dat"))
+                FileInfo fileInfo = new FileInfo(file);
+
+                // Skip empty and hidden files
+                if (fileInfo.Length == 0 || fileInfo.Attributes.HasFlag(FileAttributes.Hidden))
                     continue;
 
                 if (platformFromRepository.Games.Count(g => g.Path == file) == 0)
@@ -129,8 +143,16 @@ namespace Romulox.Controllers
                 }
                 
             }
+
+            var datFilesService = 
+                new DatFilesHelper(hostingEnvironment.WebRootPath + romuloxSettings.Value.Directories.DatFilesDirectory);
             
-            var processedGames = giantBombGameProvider.ProvideGamesAsync(platformFromRepository).Result;
+            var imageDownloader =
+                new ImageDownloader(hostingEnvironment.WebRootPath, romuloxSettings.Value.Directories.ImagesDirectory);
+            
+            GiantBombGameBuilder.Initialize(romuloxSettings.Value.ApiKeys.GiantBombApiKey, datFilesService, imageDownloader);
+            
+            var processedGames = GiantBombGameBuilder.BuildGamesAsync(platformFromRepository).Result;
 
             var games = platformFromRepository.Games.ToList();
             foreach (var game in processedGames)

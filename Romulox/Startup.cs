@@ -4,14 +4,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Romulox.Core.Configuration.RomuloxSettings;
 using Romulox.Core.Entities;
-using Romulox.Core.GiantBomb;
 using Romulox.Core.Helpers;
-using Romulox.Core.Interfaces;
 using Romulox.Core.Models;
 using Romulox.DataAccess;
 using VueCliMiddleware;
@@ -39,27 +37,24 @@ namespace Romulox
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            
+            services.Configure<RomuloxSettings>(Configuration.GetSection("RomuloxSettings"));
 
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "client-app/dist";
             });
-            
+
             services.AddDbContext<RomuloxContext>(o => o.UseSqlite("Data Source=romulox.db"));
             services.AddScoped<IPlatformsRepository, PlatformsRepository>();
 
-            var giantBombApiKey = Configuration.GetSection("ApiKeys")["GiantBombApiKey"];
-            services.AddScoped<IGameProvider>(g => new GiantBombGameProvider(giantBombApiKey));
-            
             var mapperConfiguration = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<Platform, PlatformDto>();
                     cfg.CreateMap<PlatformCreationDto, Platform>();
                     
                     cfg.CreateMap<Game, GameDto>();
-                    cfg.CreateMap<Game, GameUpdateDto>();
-                    
+
                     cfg.CreateMap<GameCreationDto, Game>()
                         .ForAllMembers(o => o.Condition((source, destination, sourceProperty) => sourceProperty != null));
                 }
@@ -84,10 +79,10 @@ namespace Romulox
 
             app.UseHttpsRedirection();
             
-            CreateContentProvider();
             app.UseStaticFiles(new StaticFileOptions()
             {
-               ContentTypeProvider = RomFileExtensionProvider.GetRomFileExtensionProvider()
+                ServeUnknownFileTypes = true,
+                DefaultContentType = "application/x-msdownload"
             });
             
             app.UseCookiePolicy();
@@ -106,21 +101,6 @@ namespace Romulox
                 }
 #endif
             });
-        }
-
-        private void CreateContentProvider()
-        {
-            var platformsDirectory = new DirectoryInfo("wwwroot/Platforms");
-            var directories = platformsDirectory.GetDirectories("*.*", System.IO.SearchOption.AllDirectories);;
-
-            foreach (var directory in directories)
-            {
-                var files = Directory.GetFiles(directory.FullName);
-                
-                //foreach(var )
-                
-            }
-            
         }
     }
 }

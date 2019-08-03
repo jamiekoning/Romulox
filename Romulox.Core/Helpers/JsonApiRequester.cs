@@ -17,12 +17,10 @@ namespace Romulox.Core.Helpers
         
         private WebClient webClient;
         public string UserAgentHeader { get; set; }
-        private JsonDependency jsonDependency;
 
         public JsonApiRequester()
         {
             QueryParameters = new Dictionary<string, string>();
-            jsonDependency = new JsonDependency();
         }
 
         private void BuildQueryString()
@@ -63,12 +61,12 @@ namespace Romulox.Core.Helpers
 
         public T DeserializeJsonResponse<T>()
         {
-            return jsonDependency.Deserialize<T>(TextResponse);
+            return JsonDependency.Deserialize<T>(TextResponse);
         }
 
         public T DeserializeJsonResponseWithSettings<T>()
         {
-            return jsonDependency.DeserializeWithSettings<T>(TextResponse);
+            return JsonDependency.DeserializeWithSettings<T>(TextResponse);
         }
     }
 }

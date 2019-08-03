@@ -11,11 +11,11 @@
         <v-layout 
                 v-else
                 v-for="platform in platforms"
+                v-bind:key="platform.id"
         >
             <v-flex>
                 <v-card
                     v-bind:to="{ name: 'PlatformDetail', params: { platformId: platform.id } }"
-                    v-on:click=""
                 >
                     <v-card-text class="headline">
                         {{ platform.name }}
@@ -25,9 +25,8 @@
         </v-layout>
 
         <v-layout>
-            <v-btn outline color="blue"
+            <v-btn outlined color="blue"
                    v-bind:to="{ name: 'PlatformAdd' }"
-                   v-on:click=""
                     
             >
                 Add Platform
@@ -40,7 +39,6 @@
     import { ApiService } from "../services/ApiService";
     import { PlatformDto } from "../models/PlatformDto";
     
-
     export default {
         name: 'PlatformList',
         data: () => ({
@@ -70,5 +68,7 @@
 </script>
 
 <style scoped>
-    
+    .v-btn {
+        margin-left: 10px;
+    }
 </style>

@@ -26,6 +26,7 @@
 
     <ItemGroup>
       <Folder Include="client-app\src\assets" />
+      <Folder Include="wwwroot\Images" />
       <Folder Include="wwwroot\lib" />
     </ItemGroup>
 </Project>

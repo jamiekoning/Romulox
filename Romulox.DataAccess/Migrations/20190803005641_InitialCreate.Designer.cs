@@ -9,8 +9,8 @@ using Romulox.DataAccess;
 namespace Romulox.DataAccess.Migrations
 {
     [DbContext(typeof(RomuloxContext))]
-    [Migration("20190721213355_AddProcessingPropertyToGameEntity")]
-    partial class AddProcessingPropertyToGameEntity
+    [Migration("20190803005641_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,8 +26,6 @@ namespace Romulox.DataAccess.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("Developers");
-
-                    b.Property<string>("IconImage");
 
                     b.Property<string>("Image");
 
@@ -57,12 +55,8 @@ namespace Romulox.DataAccess.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Company");
-
                     b.Property<string>("Name")
                         .IsRequired();
-
-                    b.Property<string>("NoIntroDatFilePath");
 
                     b.Property<string>("Path")
                         .IsRequired();

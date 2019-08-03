@@ -7,6 +7,5 @@ namespace Romulox.Core.Models
         public string Name { get; set; }
         public string Path { get; set; }
         public PlatformType PlatformType { get; set; }
-        public string NoIntroDatFilePath { get; set; }
     }
 }

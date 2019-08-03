@@ -13,8 +13,7 @@
                 </v-btn>
                 
                 <v-btn id="no" 
-                       v-bind:to="{name: 'PlatformDetail', params: { platformId: platform.id } }" 
-                       v-on:click=""
+                       v-bind:to="{name: 'PlatformDetail', params: { platformId: platform.id } }"
                 >
                     Back 
                 </v-btn>

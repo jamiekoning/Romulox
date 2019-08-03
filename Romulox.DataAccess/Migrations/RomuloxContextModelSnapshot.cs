@@ -25,8 +25,6 @@ namespace Romulox.DataAccess.Migrations
 
                     b.Property<string>("Developers");
 
-                    b.Property<string>("IconImage");
-
                     b.Property<string>("Image");
 
                     b.Property<string>("Name")
@@ -55,12 +53,8 @@ namespace Romulox.DataAccess.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Company");
-
                     b.Property<string>("Name")
                         .IsRequired();
-
-                    b.Property<string>("NoIntroDatFilePath");
 
                     b.Property<string>("Path")
                         .IsRequired();

@@ -107,44 +107,5 @@ namespace Romulox.Controllers
 
             return NoContent();
         }
-        
-        
-        [HttpPatch]
-        public IActionResult PartialUpdateGameForPlatform(Guid platformId, Guid gameId,
-            [FromBody] JsonPatchDocument<GameUpdateDto> patchDocument)
-        {
-            if (patchDocument == null)
-            {
-                return BadRequest();
-            }
-            
-            if (!platformsRepository.PlatformExists(platformId))
-            {
-                return NotFound();
-            }
-
-            var gameFromRepository = platformsRepository.GetGameForPlatform(platformId, gameId);
-
-            if (gameFromRepository == null)
-            {
-                return NotFound();
-            }
-
-            var gameToPatch = mapper.Map<GameUpdateDto>(gameFromRepository);
-            
-            patchDocument.ApplyTo(gameToPatch);
-            //needs validation
-
-            mapper.Map(gameToPatch, gameFromRepository);
-
-            platformsRepository.UpdateGameForPlatform(gameFromRepository);
-
-            if (!platformsRepository.Save())
-            {
-                return StatusCode(500, "There was an error handling your request.");
-            }
-
-            return NoContent();
-        }
     }
 }
