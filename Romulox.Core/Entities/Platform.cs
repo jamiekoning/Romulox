@@ -24,8 +24,5 @@ namespace Romulox.Core.Entities
         public PlatformType PlatformType { get; set; }
         
         public ICollection<Game> Games { get; set; }
-
-        public string NoIntroDatFilePath { get; set; }
-        public string Company { get; set; }
     }
 }

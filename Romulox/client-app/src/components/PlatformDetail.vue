@@ -1,36 +1,58 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <v-container class="grid-list-xl">
-        
-        <v-layout v-for="games in sliceGames(5)">
+        <v-layout 
+                v-for="games in sliceGames(5)"
+        >
+                    
             <v-flex xs2
                     v-for="game in games"
+                    v-bind:key="game.id"
             >
-                <v-card max-width="200px"
-                        min-height="250px"
-                        v-bind:to="{ name: 'GameDetail', params: {platformId: game.platformId, gameId: game.id} }"
-                        v-on:click=""
-                >
-                    <v-img max-height="150px"
-                           v-if="game.image"
-                           v-bind:src="`${currentDomain}${game.image}`"
-                    ></v-img>
-                    
-                    <v-card-title> {{ game.name }}</v-card-title>
-                </v-card>
+                <v-hover>
+                    <template v-slot:default="{ hover }">
+                        <v-card 
+                                v-bind:to="{ name: 'GameDetail', params: {platformId: game.platformId, gameId: game.id} }"
+                        >
+                            <v-img max-height="150px"
+                                   v-if="game.image"
+                                   v-bind:src="`${currentDomain}${game.image}`"
+                            ></v-img>
+                            
+                            <v-card
+                                min-height="150px"
+                                v-else
+                            >
+                                <v-card-text justify-center>
+                                    {{ game.name }}
+                                </v-card-text>
+                            </v-card>
+    
+                            <v-fade-transition>
+                                <v-overlay
+                                        v-if="hover"
+                                        absolute
+                                        opacity="0.9"
+                                        color="black"
+                                >
+                                    {{ game.name }}
+                                </v-overlay>
+                            </v-fade-transition>   
+                        </v-card>
+                    </template>
+                </v-hover>
             </v-flex>
         </v-layout>
         
         <v-layout id="actions">
-                <v-btn outline color="blue"
+                <v-btn outlined color="blue"
                        v-bind:disabled="refreshing"
                        v-on:click="refreshGames"
                 >
                     Refresh Games
                 </v-btn>
 
-                <v-btn outline color="red"
+                <v-btn outlined color="red"
                        v-bind:to="{ name: 'PlatformDelete', params: { platformId: this.platformId} }"
-                       v-on:click=""
                 >
                     Remove
                 </v-btn>
@@ -49,12 +71,12 @@
             return {
                 games: [],
                 refreshing: false,
-                platformId: ''
+                platformId: '',
+                hover: false
             }
         },
         computed: {
             currentDomain: function() {
-                console.log(DomainService.getCurrentDomain());
                 return DomainService.getCurrentDomain();
             }
         },
@@ -106,5 +128,9 @@
 <style scoped>
     #actions {
         padding-top: 20px;
+    }
+
+    .v-btn {
+        margin-left: 10px;
     }
 </style>

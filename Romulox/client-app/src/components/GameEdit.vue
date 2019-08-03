@@ -36,7 +36,7 @@
                     </v-layout>
         
                     <v-layout>
-                        <v-btn type="submit" color="green" outline 
+                        <v-btn type="submit" color="green" outlined
                                v-bind:disabled="editing" 
                         >
                             Edit Game

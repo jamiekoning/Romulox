@@ -14,8 +14,7 @@
                     </v-btn>
                     
                     <v-btn id="no" 
-                           v-bind:to="{name: 'PlatformDetail', params: { platformId: game.platformId } }" 
-                           v-on:click=""
+                           v-bind:to="{name: 'PlatformDetail', params: { platformId: game.platformId } }"
                     > 
                         Back 
                     </v-btn>

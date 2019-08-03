@@ -15,32 +15,29 @@
             </v-card-text>
             
             <v-card-actions>
-                <a 
-                    class="v-btn v-btn--outline v-btn--large" download
+                <v-btn
+                    outlined large download
                     v-bind:href="game.path"
                 >
                     Download
-                </a>
-
-                <v-btn large outline color="blue" 
-                       v-bind:to="{ name: 'PlatformDetail', params: { platformId: game.platformId } }" 
-                       v-on:click=""
-                >
-                    Back
                 </v-btn>
                 
-                <v-btn large outline color="green" 
-                       v-bind:to="{ name: 'GameEdit', params: { platformId: game.platformId, gameId: game.id } }" 
-                       v-on:click=""
+                <v-btn large outlined color="green" 
+                       v-bind:to="{ name: 'GameEdit', params: { platformId: game.platformId, gameId: game.id } }"
                 >
                     Edit
                 </v-btn>
                 
-                <v-btn large outline color="red" 
-                       v-bind:to="{ name: 'GameDelete', params: { platformId: game.platformId, gameId: game.id } }" 
-                       v-on:click=""
+                <v-btn large outlined color="red" 
+                       v-bind:to="{ name: 'GameDelete', params: { platformId: game.platformId, gameId: game.id } }"
                 >
                     Remove
+                </v-btn>
+
+                <v-btn large outlined color="blue"
+                       v-bind:to="{ name: 'PlatformDetail', params: { platformId: game.platformId } }"
+                >
+                    Back to Platform
                 </v-btn>
             </v-card-actions>
         </v-card>
@@ -95,5 +92,13 @@
     
     #name {
         font-size: 32px;
+    }
+    
+    .v-btn {
+        margin-right: 8px;
+    }
+    
+    h4 {
+        margin-top: 20px;
     }
 </style>
